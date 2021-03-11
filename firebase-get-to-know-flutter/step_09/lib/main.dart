@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 import 'src/authentication.dart';
 import 'src/widgets.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ApplicationState(),
@@ -25,9 +27,9 @@ class App extends StatelessWidget {
       title: 'Firebase Meetup',
       theme: ThemeData(
         buttonTheme: Theme.of(context).buttonTheme.copyWith(
-              highlightColor: Colors.deepPurple,
+              highlightColor: Colors.blue,
             ),
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blue,
         textTheme: GoogleFonts.robotoTextTheme(
           Theme.of(context).textTheme,
         ),
@@ -45,14 +47,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Firebase Meetup'),
+        title: Text("Hugh's Patrick's Day Meetup"),
       ),
       body: ListView(
         children: <Widget>[
-          Image.asset('assets/codelab.png'),
+          Image.asset('assets/view.webp'),
           SizedBox(height: 8),
-          IconAndDetail(Icons.calendar_today, 'October 30'),
-          IconAndDetail(Icons.location_city, 'San Francisco'),
+          IconAndDetail(Icons.calendar_today, 'March 17th. 8pm-ish'),
+          IconAndDetail(Icons.location_city, "Hugh's place in Dublin"),
           Consumer<ApplicationState>(
             builder: (context, appState, _) => Authentication(
               email: appState.email,
@@ -74,7 +76,7 @@ class HomePage extends StatelessWidget {
           ),
           Header("What we'll be doing"),
           Paragraph(
-            'Join us for a day full of Firebase Workshops and Pizza!',
+            'Hanging around, drinking beer and wine and talking nonsense!',
           ),
           Consumer<ApplicationState>(
             builder: (context, appState, _) => Column(
